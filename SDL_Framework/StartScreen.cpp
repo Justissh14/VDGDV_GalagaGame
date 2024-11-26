@@ -21,14 +21,29 @@ StartScreen::StartScreen() {
 	mPlayerTwo = new Texture("2UP", "emulogic.ttf", 32, { 200, 0, 0 });
 	mHiScore = new Texture("HI SCORE", "emulogic.ttf", 32, { 200, 0, 0 });
 
+	//TODO: Scoreboard can display scores but have a odd bug with displaying zeros.
+	//LOOK INTO THIS:
+	mPlayerOneScore = new Scoreboard();
+	mPlayerTwoScore = new Scoreboard();
+	mTopScore = new Scoreboard();
+
 	mTopBar->Parent(this);
 	mPlayerOne->Parent(mTopBar);
 	mPlayerTwo->Parent(mTopBar);
 	mHiScore->Parent(mTopBar);
+	mPlayerOneScore->Parent(mTopBar);
+	mPlayerTwoScore->Parent(mTopBar);
+	mTopScore->Parent(mTopBar);
 
 	mPlayerOne->Position(-Graphics::SCREEN_WIDTH * 0.35f, 0.0f);
-	mPlayerTwo->Position(Graphics::SCREEN_WIDTH * 0.2f, 0.0f);
+	mPlayerTwo->Position(Graphics::SCREEN_WIDTH * 0.35f, 0.0f);
 	mHiScore->Position(-30, 0.0f);
+	mPlayerOneScore->Position(-Graphics::SCREEN_WIDTH * 0.34f, 40.0f);
+	mPlayerTwoScore->Position(Graphics::SCREEN_WIDTH * 0.36f, 40.0f);
+	mTopScore->Position(Graphics::SCREEN_WIDTH * 0.05f, 40.0f);
+	mPlayerOneScore->Score(00);
+	mPlayerTwoScore->Score(00);
+	mTopScore->Score(645900);
 
 	//Logo Entities
 	mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.32);
@@ -129,6 +144,9 @@ void StartScreen::Render() {
 	mPlayerOne->Render();
 	mPlayerTwo->Render();
 	mHiScore->Render();
+	mPlayerOneScore->Render();
+	mPlayerTwoScore->Render();
+	mTopScore->Render();
 
 	//Logo Entity
 	if (!mAnimationDone) {
@@ -159,6 +177,12 @@ StartScreen::~StartScreen() {
 	mPlayerTwo = nullptr;
 	delete mHiScore;
 	mHiScore = nullptr;
+	delete mPlayerOneScore;
+	mPlayerOneScore = nullptr;
+	delete mPlayerTwoScore;
+	mPlayerTwoScore = nullptr;
+	delete mTopScore;
+	mTopScore = nullptr;
 
 	//Logo Entites
 	delete mLogoHolder;

@@ -81,6 +81,9 @@
     <ClCompile Include="BackgroundStars.cpp">
       <Filter>Galaga_CPP</Filter>
     </ClCompile>
+    <ClCompile Include="Scoreboard.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -144,6 +147,9 @@
       <Filter>Galaga_H</Filter>
     </ClInclude>
     <ClInclude Include="BackgroundStars.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="Scoreboard.h">
       <Filter>Galaga_H</Filter>
     </ClInclude>
   </ItemGroup>
