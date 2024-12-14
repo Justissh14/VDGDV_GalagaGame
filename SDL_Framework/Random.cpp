@@ -6,8 +6,10 @@ Random* Random::Instance() {
 	if (sInstance == nullptr) {
 		sInstance = new Random();
 	}
+
 	return sInstance;
 }
+
 void Random::Release() {
 	delete sInstance;
 	sInstance = nullptr;
@@ -27,7 +29,7 @@ unsigned Random::RandomInt() {
 
 float Random::RandomFloat() {
 	std::uniform_real_distribution<float> dist(0.0f, 1.0f);
-		return dist(mGenerator);
+	return dist(mGenerator);
 }
 
 float Random::RandomRange(float lo, float hi) {

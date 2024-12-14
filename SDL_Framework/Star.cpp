@@ -57,9 +57,9 @@ void Star::Update() {
 
 void Star::Render() {
 	if (mVisible) {
-		//we are running Texture's Render if we are visible
-		//we can do this because we inherit from texture and
-		//we have overridden the Render Function
+		//We are running Texture's Render if we are visible
+		//We can do this because we inherit from Texture AND
+		//We have overridden the Render function
 		Texture::Render();
 	}
 }

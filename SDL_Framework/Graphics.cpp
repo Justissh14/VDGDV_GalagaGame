@@ -77,6 +77,14 @@ namespace SDLFramework {
 		return tex;
 	}
 
+	void Graphics::DrawLine(float startX, float startY, float endX, float endY) {
+		SDL_Color color;
+		SDL_GetRenderDrawColor(mRenderer, &color.r, &color.g, &color.b, &color.a);
+		SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+		SDL_RenderDrawLine(mRenderer, (int)startX, (int)startY, (int)endX, (int)endY);
+		SDL_SetRenderDrawColor(mRenderer, color.r, color.g, color.b, color.a);
+	}
+
 	void Graphics::ClearBackBuffer() {
 		SDL_RenderClear(mRenderer);
 	}
@@ -127,6 +135,9 @@ namespace SDLFramework {
 			std::cerr << "Unable to get renderer. SDL_Error: " << SDL_GetError() << std::endl;
 			return false;
 		}
+
+		//Uncomment the below line to change the background to white for position testing
+		//SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
 		if (TTF_Init() == -1) {
 			std::cerr << "Unable to initialize SDL_ttf! TTF Error " << TTF_GetError() << std::endl;

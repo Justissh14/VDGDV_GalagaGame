@@ -4,25 +4,14 @@ StartScreen::StartScreen() {
 	mTimer = Timer::Instance();
 	mInputManager = InputManager::Instance();
 
-	//Screen Animation Variables
-	mAnimationStartPos = Vector2(0.0f, Graphics::SCREEN_HEIGHT);
-	mAnimationEndPos = Vec2_Zero;
-	mAnimationTotalTime = 5.0f;
-	mAnimationTimer = 0.0f;
-	mAnimationDone = false;
-
-
-
-	
-
 	//Top Bar
 	mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 80.0f);
 	mPlayerOne = new Texture("1UP", "emulogic.ttf", 32, { 200, 0, 0 });
 	mPlayerTwo = new Texture("2UP", "emulogic.ttf", 32, { 200, 0, 0 });
 	mHiScore = new Texture("HI SCORE", "emulogic.ttf", 32, { 200, 0, 0 });
 
-	//TODO: Scoreboard can display scores but have a odd bug with displaying zeros.
-	//LOOK INTO THIS:
+	//TODO: Scoreboards *can* display scores but have an odd bug with displaying Zeros.
+	//LOOK INTO THIS
 	mPlayerOneScore = new Scoreboard();
 	mPlayerTwoScore = new Scoreboard();
 	mTopScore = new Scoreboard();
@@ -36,20 +25,17 @@ StartScreen::StartScreen() {
 	mTopScore->Parent(mTopBar);
 
 	mPlayerOne->Position(-Graphics::SCREEN_WIDTH * 0.35f, 0.0f);
-	mPlayerTwo->Position(Graphics::SCREEN_WIDTH * 0.35f, 0.0f);
+	mPlayerTwo->Position(Graphics::SCREEN_WIDTH * 0.2f, 0.0f);
 	mHiScore->Position(-30, 0.0f);
-	mPlayerOneScore->Position(-Graphics::SCREEN_WIDTH * 0.34f, 40.0f);
-	mPlayerTwoScore->Position(Graphics::SCREEN_WIDTH * 0.36f, 40.0f);
+	mPlayerOneScore->Position(-Graphics::SCREEN_WIDTH * 0.23f, 40.0f);
+	mPlayerTwoScore->Position(Graphics::SCREEN_WIDTH * 0.32f, 40.0f);
 	mTopScore->Position(Graphics::SCREEN_WIDTH * 0.05f, 40.0f);
-	mPlayerOneScore->Score(00);
-	mPlayerTwoScore->Score(00);
-	mTopScore->Score(645900);
+	mTopScore->Score(645987);
 
 	//Logo Entities
 	mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.32);
 	mLogo = new Texture("GalagaLogo.png", 0, 0, 360, 180);
 	mAnimatedLogo = new AnimatedTexture("GalagaLogo.png", 0, 0, 360, 180, 3, 0.5f, AnimatedTexture::Vertical);
-	
 
 	mLogoHolder->Parent(this);
 	mLogo->Parent(mLogoHolder);
@@ -93,17 +79,31 @@ StartScreen::StartScreen() {
 	mDates->Position(0.0f, 90.0f);
 	mRights->Position(0.0f, 170.0f);
 
-	//Position Start Screen
+	//Screen Animation Variables
+	ResetAnimation();
+}
+
+void StartScreen::ResetAnimation() {
+	mAnimationStartPos = Vector2(0.0f, Graphics::SCREEN_HEIGHT);
+	mAnimationEndPos = Vec2_Zero;
+	mAnimationTotalTime = 5.0f;
+	mAnimationTimer = 0.0f;
+	mAnimationDone = false;
+
 	Position(mAnimationStartPos);
+}
+
+int StartScreen::SelectedMode() {
+	return mSelectedMode;
 }
 
 void StartScreen::ChangeSelectedMode(int change) {
 	mSelectedMode += change;
 
 	if (mSelectedMode < 0) {
-		//Set the mode to my last mode option
+		//Set the mode to our last mode option
 		mSelectedMode = 1;
-	}
+	} 
 	else if (mSelectedMode > 1) {
 		mSelectedMode = 0;
 	}
@@ -121,10 +121,8 @@ void StartScreen::Update() {
 		}
 
 		if (mInputManager->KeyPressed(SDL_SCANCODE_DOWN) ||
-			mInputManager->KeyPressed(SDL_SCANCODE_UP) ||
-			mInputManager->KeyPressed(SDL_SCANCODE_SPACE)) {
+			mInputManager->KeyPressed(SDL_SCANCODE_UP)) {
 			mAnimationTimer = mAnimationTotalTime;
-
 		}
 	}
 	else {
@@ -155,6 +153,7 @@ void StartScreen::Render() {
 	else {
 		mAnimatedLogo->Render();
 	}
+
 
 	//Play Bar Entity
 	mOnePlayerMode->Render();

@@ -12,6 +12,10 @@ public:
 
 	void ChangeSelectedMode(int change);
 
+	void ResetAnimation();
+
+	int SelectedMode();
+
 	void Update() override;
 	void Render() override;
 
@@ -26,13 +30,13 @@ private:
 	float mAnimationTimer;
 	bool mAnimationDone;
 
+
 	//Top Bar Entities
 	//Empty GameEntity/GameObject
 	GameEntity* mTopBar;
 	Texture* mPlayerOne;
 	Texture* mPlayerTwo;
 	Texture* mHiScore;
-
 	Scoreboard* mPlayerOneScore;
 	Scoreboard* mPlayerTwoScore;
 	Scoreboard* mTopScore;

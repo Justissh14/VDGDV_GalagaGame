@@ -19,11 +19,11 @@ private:
 	Random* mRandom;
 
 	static bool sScroll;
-	float  mScrollSpeed;
+	float mScrollSpeed;
 
 	bool mVisible;
-	bool mFlickerTime;
-	bool mFlickerSpeed;
+	float mFlickerTime;
+	float mFlickerSpeed;
 
 	void ScrollStar();
 };

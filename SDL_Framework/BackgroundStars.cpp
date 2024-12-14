@@ -16,6 +16,7 @@ void BackgroundStars::Release() {
 }
 
 void BackgroundStars::Scroll(bool scroll) {
+
 	Star::Scroll(scroll);
 }
 
@@ -33,7 +34,7 @@ void BackgroundStars::Render() {
 
 BackgroundStars::~BackgroundStars() {
 	for (auto layer : mLayers) {
-		delete mLayers;
+		delete layer;
 		layer = nullptr;
 	}
 }
@@ -43,3 +44,4 @@ BackgroundStars::BackgroundStars() {
 		mLayers[i] = new StarLayer(i);
 	}
 }
+

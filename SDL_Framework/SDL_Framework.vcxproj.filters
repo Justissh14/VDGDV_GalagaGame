@@ -19,6 +19,15 @@
     <Filter Include="Galaga_CPP">
       <UniqueIdentifier>{9952ba34-431d-4bd7-ab8e-f0554c5b38fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Singletons">
+      <UniqueIdentifier>{90221eec-f0b9-408e-bd92-33758388ee7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{996f8fcf-2eea-448d-8d70-eea35270822c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Colliders">
+      <UniqueIdentifier>{164405b8-e491-4b2a-9e00-10c915ce64c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDL_Framework.cpp">
@@ -84,51 +93,45 @@
     <ClCompile Include="Scoreboard.cpp">
       <Filter>Galaga_CPP</Filter>
     </ClCompile>
+    <ClCompile Include="ScreenManager.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScreen.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaySideBar.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierPAth.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Formation.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Butterfly.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Wasp.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MathHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatedTexture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleCollider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsHelper.h">
@@ -150,6 +153,84 @@
       <Filter>Galaga_H</Filter>
     </ClInclude>
     <ClInclude Include="Scoreboard.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedTexture.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEntity.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysEntity.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Header Files\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Header Files\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenManager.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScreen.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaySideBar.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPath.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="Formation.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="Butterfly.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="Wasp.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
       <Filter>Galaga_H</Filter>
     </ClInclude>
   </ItemGroup>
