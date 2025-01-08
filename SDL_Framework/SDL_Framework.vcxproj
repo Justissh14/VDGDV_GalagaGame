@@ -114,7 +114,8 @@
     </Link>
     <PostBuildEvent>
       <Command>copy /y "$(ProjectDir)\dep\devel\x64\*.dll" "$(OutDir)
-xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
+xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
+xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,7 +138,8 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     </Link>
     <PostBuildEvent>
       <Command>copy /y "$(ProjectDir)\dep\devel\x64\*.dll" "$(OutDir)
-xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
+xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
+xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -150,6 +152,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Butterfly.cpp" />
+    <ClCompile Include="CaptureBeam.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -173,6 +176,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Wasp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +189,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Butterfly.h" />
+    <ClInclude Include="CaptureBeam.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Enemy.h" />
@@ -209,7 +214,11 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClInclude Include="StartScreen.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Wasp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Data\Level1.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

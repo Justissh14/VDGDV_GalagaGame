@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "PhysicsManager.h"
 
 std::vector<std::vector<Vector2>> Enemy::sPaths;
 Player* Enemy::sPlayer = nullptr;
@@ -9,36 +10,115 @@ void Enemy::CreatePaths() {
 
 	int currentPath = 0;
 	BezierPath* path = new BezierPath();
-	//path->AddCurve({ Vector2(500.0f, 10.0), Vector2(500.0f, 0.0f),
-	//				Vector2(500.0f, 310.0f), Vector2(500.0f, 300.0f) }, 1);
-
 	path->AddCurve({
 		Vector2(screenMidPoint + 50.0f, -10.0f),
 		Vector2(screenMidPoint + 50.0f, -20.0f),
 		Vector2(screenMidPoint + 50.0f, 30.0f),
-		Vector2(screenMidPoint + 50.0f, 20.0f) 
-		}, 1);
-
+		Vector2(screenMidPoint + 50.0f, 20.0f) }, 1);
 	path->AddCurve({
 		Vector2(screenMidPoint + 50.0f, 20.0f),
 		Vector2(screenMidPoint + 50.0f, 100.0f),
 		Vector2(75.0f, 325.0f),
-		Vector2(75.0f, 425.0f)
-		}, 25);
-
+		Vector2(75.0f, 425.0f) }, 25);
 	path->AddCurve({
 		Vector2(75.0f, 425.0f),
 		Vector2(75.0f, 650.0f),
 		Vector2(350.0f, 650.0f),
-		Vector2(350.0f, 425.0f)
-		}, 25);
+		Vector2(350.0f, 425.0f) }, 25);
 
 	sPaths.push_back(std::vector<Vector2>());
 	path->Sample(&sPaths[currentPath]);
+	delete path;
+
+	currentPath = 1;
+	path = new BezierPath();
+	int fullScreen = screenMidPoint * 2;
+	path->AddCurve({
+		Vector2(screenMidPoint - 50.0f, -10.0f),
+		Vector2(screenMidPoint - 50.0f, -20.0f),
+		Vector2(screenMidPoint - 50.0f, 30.0f),
+		Vector2(screenMidPoint - 50.0f, 20.0f) }, 1);
+	path->AddCurve({
+		Vector2(screenMidPoint - 50.0f, 20.0f),
+		Vector2(screenMidPoint - 50.0f, 100.0f),
+		Vector2(fullScreen - 75.0f, 325.0f),
+		Vector2(fullScreen - 75.0f, 425.0f) }, 25);
+	path->AddCurve({
+		Vector2(fullScreen - 75.0f, 425.0f),
+		Vector2(fullScreen - 75.0f, 650.0f),
+		Vector2(fullScreen - 350.0f, 650.0f),
+		Vector2(fullScreen - 350.0f, 425.0f) }, 25);
+
+	sPaths.push_back(std::vector<Vector2>());
+	path->Sample(&sPaths[currentPath]);
+	delete path;
+
+	currentPath = 2;
+	float temp = screenMidPoint - 100.0f;
+
+	path = new BezierPath();
+	path->AddCurve({
+		Vector2(-40.0f, 720.0f),
+		Vector2(-50.0f, 720.0f),
+		Vector2(10.0f, 720.0f),
+		Vector2(0.0f, 720.0f) }, 1);
+	path->AddCurve({
+		Vector2(0.0f, 720.0f),
+		Vector2(200.0f, 720.0f),
+		Vector2(temp, 500.0f),
+		Vector2(temp, 400.0f) }, 15);
+	path->AddCurve({
+		Vector2(temp, 400.0f),
+		Vector2(temp, 200.0f),
+		Vector2(40.0f, 200.0f),
+		Vector2(40.0f, 400.0f) }, 15);
+	path->AddCurve({
+		Vector2(40.0f, 400.0f),
+		Vector2(40.0f, 500.0f),
+		Vector2(temp - 120.0f, 600.0f),
+		Vector2(temp - 40.0f, 440.0f) }, 15);
+
+	sPaths.push_back(std::vector<Vector2>());
+	path->Sample(&sPaths[currentPath]);
+	delete path;
+
+	currentPath = 3;
+	temp = screenMidPoint + 60.0f;
+	float temp2 = fullScreen - 40.0f;
+
+	path = new BezierPath();
+	path->AddCurve({
+		Vector2(temp2 + 40.0f, 720.0f),
+		Vector2(temp2 + 50.0f, 720.0f),
+		Vector2(temp2 + 10.0f, 720.0f),
+		Vector2(temp2, 720.0f) }, 1);
+	path->AddCurve({
+		Vector2(temp2, 720.0f),
+		Vector2(temp2 - 200.0f, 720.0f),
+		Vector2(temp, 500.0f),
+		Vector2(temp, 400.0f) }, 15);
+	path->AddCurve({
+		Vector2(temp, 400.0f),
+		Vector2(temp, 200.0f),
+		Vector2(temp2 - 40.0f, 200.0f),
+		Vector2(temp2 - 40.0f, 400.0f) }, 15);
+	path->AddCurve({
+		Vector2(temp2 - 40.0f, 400.0f),
+		Vector2(temp2 - 40.0f, 500.0f),
+		Vector2(temp + 120.0f, 600.0f),
+		Vector2(temp + 40.0f, 440.0f) }, 15);
+
+	sPaths.push_back(std::vector<Vector2>());
+	path->Sample(&sPaths[currentPath]);
+	delete path;
 }
 
 void Enemy::SetFormation(Formation* formation) {
 	sFormation = formation;
+}
+
+void Enemy::CurrentPlayer(Player* player) {
+	sPlayer = player;
 }
 
 Enemy::Enemy(int path, int index, bool challenge) : 
@@ -54,6 +134,29 @@ Enemy::Enemy(int path, int index, bool challenge) :
 	mTextures[1] = nullptr;
 
 	mSpeed = 450.0f;
+
+	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Hostile);
+
+	mDeathAnimation = new AnimatedTexture("EnemyExplosion.png", 0, 0, 128, 128, 5, 1.0f, AnimatedTexture::Horizontal);
+	mDeathAnimation->Parent(this);
+	mDeathAnimation->Position(Vec2_Zero);
+	mDeathAnimation->SetWrapMode(AnimatedTexture::Once);
+}
+
+bool Enemy::InDeathAnimation() {
+	return mDeathAnimation->IsAnimating();
+}
+
+bool Enemy::IgnoreCollisions() {
+	return mCurrentState == Dead;
+}
+
+void Enemy::Hit(PhysEntity* other) {
+	if (mCurrentState == InFormation) {
+		Parent(nullptr);
+	}
+
+	mCurrentState = Dead;
 }
 
 Enemy::~Enemy() {
@@ -63,6 +166,9 @@ Enemy::~Enemy() {
 		delete texture;
 		texture = nullptr;
 	}
+
+	delete mDeathAnimation;
+	mDeathAnimation = nullptr;
 }
 
 Enemy::States Enemy::CurrentState() {
@@ -126,7 +232,6 @@ void Enemy::HandleFlyInState() {
 	if (mCurrentWaypoint < sPaths[mCurrentPath].size()) {
 		Vector2 dist = sPaths[mCurrentPath][mCurrentWaypoint] - Position();
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-		//TODO: Testing a fix for enemies being beyblades
 		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
 
 		if ((sPaths[mCurrentPath][mCurrentWaypoint] - Position()).MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
@@ -153,6 +258,30 @@ void Enemy::HandleFlyInState() {
 
 void Enemy::HandleInFormationState() {
 	Position(LocalFormationPosition());
+
+	float rotation = Rotation();
+	if (rotation != 0.0f) {
+		if (rotation > 5.0f) {
+			float rotationSpeed = 200.0f;
+			float rotationDir = (rotation >= 180) ? 1.0f : -1.0f;
+			Rotate(rotationDir * mTimer->DeltaTime() * rotationSpeed);
+		}
+		else {
+			Rotation(0.0f);
+		}
+	}
+}
+
+void Enemy::HandleDeadState() {
+	if (mDeathAnimation->IsAnimating()) {
+		mDeathAnimation->Update();
+	}
+}
+
+void Enemy::RenderDeadState() {
+	if (mDeathAnimation->IsAnimating()) {
+		mDeathAnimation->Render();
+	}
 }
 
 void Enemy::HandleStates() {
@@ -210,7 +339,10 @@ void Enemy::RenderStates() {
 		RenderDiveState();
 		break;
 	case Dead:
+		//TODO: Render Death Texture in Dead State
 		RenderDeadState();
 		break;
 	}
+
+	PhysEntity::Render();
 }

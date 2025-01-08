@@ -89,7 +89,8 @@ Vector2 Wasp::LocalFormationPosition() {
 void Wasp::HandleDiveState() {
 	int currentPath = mIndex % 2;
 
-	if (mCurrentWaypoint < sDivePaths[currentPath].size()) {
+	if (mCurrentWaypoint < sDivePaths[currentPath].size() &&
+		!sPlayer->IsAnimating() && sPlayer->Visible()) {
 		//Follow dive path
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths[currentPath][mCurrentWaypoint];
 		Vector2 dist = waypointPos - Position();
@@ -104,17 +105,20 @@ void Wasp::HandleDiveState() {
 	else {
 		//Return to Formation
 		Vector2 dist = WorldFormationPosition() - Position();
+		if ((dist.MagnitudeSqr() < EPSILON * mSpeed / 25) && !sPlayer->Visible()) {
+			return;
+		}
 
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+		if (sPlayer->Visible()) {
+			Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+		}
 
 		if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25) {
 			JoinFormation();
 		}
 	}
 }
-
-void Wasp::HandleDeadState() { }
 
 void Wasp::RenderDiveState() {
 	mTextures[0]->Render();
@@ -146,8 +150,6 @@ void Wasp::RenderDiveState() {
 	);
 }
 
-void Wasp::RenderDeadState() { }
-
 Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 	Enemy(path, index, challenge), mDiver(diver) {
 
@@ -160,6 +162,16 @@ Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 	}
 
 	mType = Enemy::Wasp;
+
+	AddCollider(new BoxCollider(mTextures[1]->ScaledDimensions()));
+}
+
+void Wasp::Hit(PhysEntity* other) {
+	AudioManager::Instance()->PlaySFX("SFX/WaspDestroyed.wav", 0, 3);
+	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 50 : 100);
+	Enemy::Hit(other);
+	//REMOVE: This signifies that the student looked at the code, found this tag, and removed it before submitting assignment 1
+	std::cout << "Wasp Hit" << std::endl;
 }
 
 Wasp::~Wasp() { }

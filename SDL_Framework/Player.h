@@ -15,6 +15,7 @@ public:
 	void Update() override;
 	void Render() override;
 
+	bool Visible();
 	void Visible(bool visible);
 	bool IsAnimating();
 
@@ -23,14 +24,14 @@ public:
 
 	void AddScore(int change);
 
-	void WasHit();
+	bool WasHit();
 
 	//Inherited from PhysEntity
 	bool IgnoreCollisions() override;
 	void Hit(PhysEntity* other) override;
 
 private:
-	static const int MAX_BULLETS = 2;
+	static const int MAX_BULLETS = 20;
 	Bullet* mBullets[MAX_BULLETS];
 
 	bool mWasHit;

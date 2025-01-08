@@ -42,9 +42,9 @@ Player::Player() {
 	mWasHit = false;
 
 	mScore = 0;
-	mLives = 2;
+	mLives = 5;
 
-	mMoveSpeed = 100.0f;
+	mMoveSpeed = 200.0f;
 	//This Vector is acting as a Minimum and a Maximum
 	//It is NOT a coordinate location
 	mMoveBounds = Vector2(0.0f, 800.0f);
@@ -88,7 +88,6 @@ Player::~Player() {
 }
 
 void Player::Visible(bool visible) {
-	std::cout << "Visible: " << visible << std::endl;
 	mVisible = visible;
 }
 
@@ -108,16 +107,18 @@ int Player::Lives() {
 	return mLives;
 }
 
-//TODO: Temporary functionality. Hit() will be what runs this functionality
-void Player::WasHit() {
-	mLives -= 1;
-	mAnimating = true;
-	mDeathAnimation->ResetAnimation();
-	mAudio->PlaySFX("SFX/PlayerExplosion.wav");
+
+bool Player::WasHit() {
+	return mWasHit;
+}
+
+bool Player::Visible() {
+	return mVisible;
 }
 
 bool Player::IgnoreCollisions() {
-	return !mVisible || mAnimating;
+	//FIX: Stops getting hit a second time while in death animation
+	return !mVisible || mAnimating || !Active();
 }
 
 void Player::Hit(PhysEntity* other) {
@@ -125,11 +126,17 @@ void Player::Hit(PhysEntity* other) {
 	mAnimating = true;
 	mDeathAnimation->ResetAnimation();
 	mWasHit = true;
-	//TODO: ADD AUDIO TO DEATH!
+	mAudio->PlaySFX("SFX/PlayerExplosion.wav");
 }
 
 void Player::Update() {
 	if (mAnimating) {
+
+		//FIX: Fixes death loop
+		if (mWasHit) {
+			mWasHit = false;
+		}
+
 		mDeathAnimation->Update();
 		mAnimating = mDeathAnimation->IsAnimating();
 	}

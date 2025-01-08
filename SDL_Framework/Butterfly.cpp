@@ -170,7 +170,8 @@ void Butterfly::HandleDiveState() {
 		currentPath += 2;
 	}
 
-	if (mCurrentWaypoint < sDivePaths[currentPath].size()) {
+	if (mCurrentWaypoint < sDivePaths[currentPath].size() && 
+		!sPlayer->IsAnimating() && sPlayer->Visible()) {
 		//Follow dive path
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths[currentPath][mCurrentWaypoint];
 		Vector2 dist = waypointPos - Position();
@@ -187,14 +188,16 @@ void Butterfly::HandleDiveState() {
 		Vector2 dist = WorldFormationPosition() - Position();
 
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+		
+		if (sPlayer->Visible()) {
+			Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+		}
 
 		if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25) {
 			JoinFormation();
 		}
 	}
 }
-void Butterfly::HandleDeadState() { }
 
 void Butterfly::RenderDiveState() {
 	mTextures[0]->Render();
@@ -228,7 +231,6 @@ void Butterfly::RenderDiveState() {
 		finalPos.y
 	);
 }
-void Butterfly::RenderDeadState() { }
 
 Butterfly::Butterfly(int path, int index, bool challenge) :
 Enemy(path, index, challenge)
@@ -243,6 +245,16 @@ Enemy(path, index, challenge)
 	}
 
 	mType = Enemy::Butterfly;
+
+	AddCollider(new BoxCollider(mTextures[1]->ScaledDimensions()));
+}
+
+void Butterfly::Hit(PhysEntity* other) {
+	AudioManager::Instance()->PlaySFX("SFX/ButterflyDestroyed.wav", 0, 3);
+	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 80 : 160);
+	Enemy::Hit(other);
+	std::cout << "Butterfly Hit" << std::endl;
+	//REMOVE: This signifies that the student looked at the code, found this tag, and removed it before submitting assignment 1
 }
 
 Butterfly::~Butterfly() { }

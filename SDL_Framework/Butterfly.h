@@ -7,6 +7,9 @@ public:
 
 	void Dive(int type = 0) override;
 
+	//Inherited this from PhysEntity
+	void Hit(PhysEntity* other) override;
+
 	Butterfly(int path, int index, bool challenge);
 	~Butterfly();
 
@@ -18,8 +21,6 @@ private:
 	Vector2 LocalFormationPosition() override;
 
 	void HandleDiveState() override;
-	void HandleDeadState() override;
 
 	void RenderDiveState() override;
-	void RenderDeadState() override;
 };

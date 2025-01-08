@@ -28,6 +28,12 @@
     <Filter Include="Header Files\Colliders">
       <UniqueIdentifier>{164405b8-e491-4b2a-9e00-10c915ce64c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{09a99204-d780-4173-8910-7a2d9379f131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TinyXML">
+      <UniqueIdentifier>{d62dfd9f-855a-439b-9a21-64860a5a22b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDL_Framework.cpp">
@@ -127,6 +133,12 @@
       <Filter>Galaga_CPP</Filter>
     </ClCompile>
     <ClCompile Include="Boss.cpp">
+      <Filter>Galaga_CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="CaptureBeam.cpp">
       <Filter>Galaga_CPP</Filter>
     </ClCompile>
   </ItemGroup>
@@ -233,5 +245,16 @@
     <ClInclude Include="Boss.h">
       <Filter>Galaga_H</Filter>
     </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="CaptureBeam.h">
+      <Filter>Galaga_H</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Data\Level1.xml">
+      <Filter>Data</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

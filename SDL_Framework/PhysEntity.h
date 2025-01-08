@@ -17,8 +17,11 @@ namespace SDLFramework {
 
 		virtual void Render() override;
 
+		std::string Tag();
+
 	protected:
-		
+		std::string tag;
+
 		std::vector<Collider*> mColliders;
 
 		Collider* mBroadPhaseCollider;

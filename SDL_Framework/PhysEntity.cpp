@@ -51,6 +51,10 @@ namespace SDLFramework {
 		return mId;
 	}
 
+	std::string PhysEntity::Tag() {
+		return tag;
+	}
+
 	bool PhysEntity::IgnoreCollisions() {
 		return false;
 	}
@@ -80,7 +84,7 @@ namespace SDLFramework {
 		if (narrowPhaseCheck) {
 			for (int i = 0; i < mColliders.size(); i++) {
 				for (int j = 0; j < other->mColliders.size(); j++) {
-					if (ColliderVsColliderCheck(mColliders[i], other->mColliders[j])) {
+  					if (ColliderVsColliderCheck(mColliders[i], other->mColliders[j])) {
 						//A collision has happened!
 						return true;
 					}

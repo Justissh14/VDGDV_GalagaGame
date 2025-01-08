@@ -15,6 +15,7 @@ public:
 
 	static void CreatePaths();
 	static void SetFormation(Formation* formation);
+	static void CurrentPlayer(Player* player);
 
 	States CurrentState();
 	Types Type();
@@ -25,8 +26,12 @@ public:
 
 	virtual void Dive(int type = 0);
 
+	bool InDeathAnimation();
+
 	void Update() override;
 	void Render() override;
+
+	virtual void Hit(PhysEntity* other) override;
 
 protected:
 	static Formation* sFormation;
@@ -36,6 +41,7 @@ protected:
 	Timer* mTimer;
 
 	Texture* mTextures[2];
+	AnimatedTexture* mDeathAnimation;
 
 	States mCurrentState;
 	Types mType;
@@ -64,14 +70,20 @@ protected:
 	virtual void HandleFlyInState();
 	virtual void HandleInFormationState();
 	virtual void HandleDiveState() = 0;
-	virtual void HandleDeadState() = 0;
+
+	//FIX: Make HandleDeadState not pure virtual
+	virtual void HandleDeadState();
 
 	void HandleStates();
 
 	virtual void RenderFlyInState();
 	virtual void RenderInFormationState();
 	virtual void RenderDiveState() = 0;
-	virtual void RenderDeadState() = 0;
+
+	//FIX: Make HandleDeadState not pure virtual
+	virtual void RenderDeadState();
 
 	void RenderStates();
+
+	bool IgnoreCollisions() override;
 };
