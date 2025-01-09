@@ -42,9 +42,9 @@ Player::Player() {
 	mWasHit = false;
 
 	mScore = 0;
-	mLives = 5;
+	mLives = 3;
 
-	mMoveSpeed = 200.0f;
+	mMoveSpeed = 250.0f;
 	//This Vector is acting as a Minimum and a Maximum
 	//It is NOT a coordinate location
 	mMoveBounds = Vector2(0.0f, 800.0f);

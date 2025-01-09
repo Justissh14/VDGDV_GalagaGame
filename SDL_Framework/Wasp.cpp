@@ -125,7 +125,7 @@ void Wasp::RenderDiveState() {
 
 	//debug render of the dive path
 	//TODO: Comment out the below for finished product!
-	int currentPath = mIndex % 2;
+	/*int currentPath = mIndex % 2;
 	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
 			mDiveStartPosition.x + sDivePaths[currentPath][i].x,
@@ -133,21 +133,21 @@ void Wasp::RenderDiveState() {
 			mDiveStartPosition.x + sDivePaths[currentPath][i + 1].x,
 			mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
 		);
-	}
+	}*/
 
 	//debug render of the return path
 	//TODO: If we encounter weird behaviours with the return path drawing
 	//COME BACK HERE
-	Vector2 finalPos = WorldFormationPosition();
+	/*Vector2 finalPos = WorldFormationPosition();
 	auto currentDivePath = sDivePaths[currentPath];
-	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];
+	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];*/
 
-	Graphics::Instance()->DrawLine(
+	/*Graphics::Instance()->DrawLine(
 		pathEndPos.x,
 		pathEndPos.y,
 		finalPos.x,
 		finalPos.y
-	);
+	);*/
 }
 
 Wasp::Wasp(int path, int index, bool challenge, bool diver) :
@@ -170,7 +170,6 @@ void Wasp::Hit(PhysEntity* other) {
 	AudioManager::Instance()->PlaySFX("SFX/WaspDestroyed.wav", 0, 3);
 	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 50 : 100);
 	Enemy::Hit(other);
-	//REMOVE: This signifies that the student looked at the code, found this tag, and removed it before submitting assignment 1
 	std::cout << "Wasp Hit" << std::endl;
 }
 

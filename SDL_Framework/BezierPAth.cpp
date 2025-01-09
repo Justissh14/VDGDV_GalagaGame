@@ -1,3 +1,4 @@
+
 #include "BezierPath.h"
 
 BezierPath::BezierPath() { }

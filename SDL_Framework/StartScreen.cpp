@@ -50,6 +50,8 @@ StartScreen::StartScreen() {
 	mTwoPlayerMode = new Texture("2 Player", "emulogic.ttf", 32, { 230, 230, 230 });
 	mCursor = new Texture("Cursor.png");
 
+
+
 	mPlayModes->Parent(this);
 	mOnePlayerMode->Parent(mPlayModes);
 	mTwoPlayerMode->Parent(mPlayModes);
