@@ -208,14 +208,15 @@ void Butterfly::RenderDiveState() {
 	if (mEscort) {
 		currentPath += 2;
 	}
-	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
+
+	/*for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
 			mDiveStartPosition.x + sDivePaths[currentPath][i].x,
 			mDiveStartPosition.y + sDivePaths[currentPath][i].y,
 			mDiveStartPosition.x + sDivePaths[currentPath][i + 1].x,
 			mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
 		);
-	}
+	}*/
 
 	//debug render of the return path
 	//TODO: If we encounter weird behaviours with the return path drawing

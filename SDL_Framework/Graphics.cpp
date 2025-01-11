@@ -80,7 +80,11 @@ namespace SDLFramework {
 	void Graphics::DrawLine(float startX, float startY, float endX, float endY) {
 		SDL_Color color;
 		SDL_GetRenderDrawColor(mRenderer, &color.r, &color.g, &color.b, &color.a);
-		SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+
+		//this is Plan B for when the line randomly show up, instead of lines being invisible by its transluencency its invisible by blending in with background color
+
+
+		SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 		SDL_RenderDrawLine(mRenderer, (int)startX, (int)startY, (int)endX, (int)endY);
 		SDL_SetRenderDrawColor(mRenderer, color.r, color.g, color.b, color.a);
 	}

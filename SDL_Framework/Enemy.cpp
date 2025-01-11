@@ -304,27 +304,31 @@ void Enemy::HandleStates() {
 void Enemy::RenderFlyInState() {
 	mTextures[0]->Render();
 
-	for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {
+	//NOTE: Dive Path Line Visiblity
+
+	/*for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
 			sPaths[mCurrentPath][i].x,
 			sPaths[mCurrentPath][i].y,
 			sPaths[mCurrentPath][i + 1].x,
 			sPaths[mCurrentPath][i + 1].y
 		);
-	}
+	}*/
 }
 
 void Enemy::RenderInFormationState() {
 	mTextures[sFormation->GetTick() % 2]->Render();
 
-	for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {
+	//NOTE: Dive Path Line Visiblity
+
+	/*for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
 			sPaths[mCurrentPath][i].x,
 			sPaths[mCurrentPath][i].y,
 			sPaths[mCurrentPath][i + 1].x,
 			sPaths[mCurrentPath][i + 1].y
 		);
-	}
+	}*/
 }
 
 void Enemy::RenderStates() {
